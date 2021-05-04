@@ -64,7 +64,7 @@ lrm.adl / deltamethod(~ (x3) / (1 - x2), coef(lm.adl), vcov(lm.adl))
 # in logs of commitments
 lm.adl.log <- lm(milex_SI ~ lag_milex_SI + lag_ln_commitments + 
                    peace_5 + log_fatalities_combined +
-                   lag_rep_pres +
+                   lag_rep_pres + cold_war +
                    lag_budget_deficit + lag_change_gdp +
                    lag_mprival_milex,
              data = us.data,
@@ -107,14 +107,14 @@ stargazer(lm.adl, lm.adl.log,
           order = c("lag_milex_SI",
                     "lag_commitments","lag_ln_commitments", 
                     "lag_change_gdp", 
-                    "lag_mprival_milex",
+                    "lag_mprival_milex", "cold_war",
                     "peace_5", "log_fatalities_combined",
                     "lag_rep_pres", "lag_budget_deficit"),
           covariate.labels=c("Lagged Military Spending",
                              "Lag Alliance Commitments",
                              "Lag Log Alliance Commitments", 
                              "Lag Change in GDP",
-                             "Lag Major Rival Spending",
+                             "Lag Major Rival Spending", "Cold War",
                              "Post-Conflict Years", "Log Combat Fatalities",
                              "Lag Republican President", 
                              "Lag Budget Deficit"

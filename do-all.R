@@ -1,6 +1,11 @@
 # Joshua Alley and Matthew Fuhrmann
 # script to execute the full analysis of US alliances and military spending
 
+library(here)
+
+# set working directory for replication outside Rstudio project
+setwd(here())
+getwd()
 
 # run scripts in proper order
 # set up environment

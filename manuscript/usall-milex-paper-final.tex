@@ -1,0 +1,405 @@
+\documentclass[12pt,hidelinks]{article}
+
+\usepackage{fullpage}
+\usepackage{graphicx, rotating, booktabs} 
+\usepackage{times} 
+\usepackage{indentfirst} 
+\usepackage{setspace}
+\usepackage{grffile} 
+\usepackage{hyperref}
+\usepackage{adjustbox}
+\usepackage{amsmath}
+\usepackage{multirow} 
+\usepackage{comment} 
+
+%Use this package for Chicago style in footnote form (i.e., IS style)
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{blindtext,alltt}
+%\usepackage{biblatex-chicago}
+\usepackage[notes,backend=biber]{biblatex-chicago}
+%\usepackage[authordate, backend=biber]{biblatex-chicago}
+%\usepackage[notes, short, backend=biber]{biblatex-chicago} % short author-title to start. Not what we want. 
+
+\addbibresource{../us-all-milex-bib.bib}% Syntax for version >= 1.2
+
+\begin{document}
+
+\singlespace
+
+\title{\textbf{\huge Budget Breaker?}\\\Large \textbf{The Financial Cost of U.S. Military Alliances}}
+
+
+\author{Joshua Alley\thanks{Author names in alphabetical order.} \\
+Postdoctoral Research Associate\\
+Democratic Statecraft Lab\\
+University of Virginia  \\
+\and
+Matthew Fuhrmann\\
+Professor\\
+Department of Political Science\\
+Texas A\&M University}
+
+ 
+\date{\today\thanks{This research was funded in part by the Albritton Center for Grand Strategy at Texas A\&M University. The authors thank Soren Jordan, Andrew Philips, Clayton Webb, seminar participants at the Albritton Center for Grand Strategy and U.S. Naval War College, as well as the editor and two anonymous reviewers for helpful comments. }}
+
+
+\maketitle 
+
+
+
+\begin{abstract}
+\noindent How do alliance commitments affect U.S. military spending? 
+This question is at the heart of debates about the value of alliances and the future of U.S. grand strategy.
+One perspective, which we call the \textit{budget hawk} view, asserts that alliances are exorbitantly expensive, as they require military investments to deter third-party adversaries and reassure allies, encourage free-riding, and facilitate reckless allied behavior.
+A competing view, which we label the \textit{bargain hunter} perspective, claims that U.S. alliance commitments are relatively cheap and might even reduce military spending.
+Allies provide key military capabilities, reassurance and extended deterrence are cheaper than it might initially seem, and alliances reduce the need for costly military interventions by promoting peace. 
+Despite the importance of this debate, few studies have attempted to determine how alliance commitments affect U.S. military spending.
+We use over-time variation in the number of U.S. alliance commitments to estimate their financial toll.
+A statistical model of U.S. defense expenditures from 1947 to 2019 shows that one new alliance commitment adds between \$11 and \$21 billion to the size of the defense budget. 
+Military alliances benefit the United States in many ways but, consistent with the budget hawk view, they are expensive.
+%As scholars and policymakers weigh the benefits and burdens of alliance commitments, they should consider whether the political and economic gains of security guarantees exceed their high financial cost. 
+\end{abstract}
+
+\thispagestyle{empty}
+
+\clearpage
+
+\doublespace 
+
+
+\setcounter{page}{1}
+
+\input{frontend-final}
+
+
+\subsection*{Estimation Challenges and Solutions}
+
+
+We begin by examining trends in alliance commitments and military spending. To measure U.S. alliance commitments, we use the Alliance Treaty Obligations and Provisions (ATOP) database to identify countries with a formal alliance treaty.\footcite{Leedsetal2002}
+We focus on the number of countries with U.S. protection -- rather than a count of alliance treaties -- to capture variation in the size of the agreements.\footnote{There is less variation in the number of treaty commitments, which falls even as the number of states with a formal U.S. security commitment increases. Changes in alliance treaties are largely driven by bilateral alliances, since there has not been a new multilateral alliance since 1954.}  
+This approach also allows us to account for changes in membership over time within the same alliance, such as the waves of NATO expansion after 1949. 
+We obtain military spending data from the Stockholm International Peace Research Institute (SIPRI), which measures defense spending in millions of 2011 U.S. dollars.\autocite{SIPRI2019}
+To facilitate substantive interpretation, we divide the SIPRI military spending variable by 1,000 to express it in billions of dollars.   
+
+
+\autoref{fig:outcome-iv} plots temporal trends in U.S. alliance commitments and defense expenditures after World War II. 
+We show the overall levels of these variables in each year. 
+The figure illustrates that both spending and commitments increased considerably after 1947. 
+The number of alliance commitments jumps as NATO and other treaties enter into force in the 1950s, before stabilizing with a gradual upward trend. 
+Military spending peaks during the Korean War, the Vietnam War, the defense buildup during the Reagan administration, and the 2003 Iraq War. 
+
+
+\begin{figure}
+\includegraphics[width = .95\textwidth]{../figures/outcome-iv.png}
+\caption{Time series of U.S. alliance commitments and defense spending from 1947 to 2019.}
+\label{fig:outcome-iv}
+\end{figure}
+
+
+To accurately estimate the relationship between alliance commitments and military spending, we have to account for correlations between past and current values of both variables.
+\autoref{fig:outcome-iv} suggests that both alliances and military spending are highly autocorrelated, meaning that past values of each variable seem to strongly predict current values. 
+It is therefore possible that a simple correlation between these two variables could reflect simultaneous increases over time rather than a real relationship. 
+Put differently, a standard regression with two autocorrelated or non-stationary variables could easily generate spurious findings.\autocite{GrangerNewbold1974}
+
+
+% describe core of our model
+Given persistence in alliance commitments and military spending over time, we use an autoregressive distributed lag model to estimate the correlation between alliances and defense spending.
+The key independent variable in this model is the lagged number of alliance commitments, and we also use a one-year lag of military spending to predict current military spending. 
+This regression model specification assumes that any effect of changing the number of U.S. alliances on military spending takes place over many years.
+As the above discussion of the budget hawk and bargain hunter schools underscores, the financial burdens and savings generated by alliances may not necessarily happen immediately.
+
+
+% Discuss form and uncertainty in regression models
+Dynamic regression models can take many forms. 
+Some models are best when the independent or outcome variable has long memory, otherwise known as a unit root.\footnote{Specifically, error correction models assume that the outcome and key variable are unit roots. We do not present error correction models in the paper, but we find some evidence of cointegration and very similar long-run effects of alliances with this specification.} 
+The problem is that reliably identifying the dynamic properties of alliances, military spending, and other determinants of military spending is difficult. 
+Existing tests for unit roots struggle to identify the specific dynamic properties of a series, especially in smaller samples or cases of high autocorrelation that are close to but less than integrated. 
+Unit root tests for integration have low power and are very sensitive to specification choices like trend, drift, and lag length.\autocite{Webbetal2019}
+
+
+% LRM test  
+To overcome this issue, we use a more general and robust technique to identify whether there is a long-run relationship between alliances and military spending. 
+A long-run relationship implies that changes in alliances dynamically affect military spending. 
+To determine whether alliances and defense spending are in a long-run relationship, we employ a long-run multiplier bounds test.\autocite{Webbetal2020} 
+This analysis uses coefficients from regression models to identify long-run relationships regardless of the dynamic properties of the outcome and independent variable and accommodates uncertainty about the dynamic properties of the variables. 
+In our model, the bounds test uses the lagged alliance commitments and lagged military spending coefficient estimates. 
+We find that the long-run multiplier estimate has a test-statistic greater than the upper bound of the long-run multiplier test.\footnote{To be precise, the long-run multiplier test statistic is 6.7 and the conservative upper bound is 3.59.} 
+As a result, we can conclude that there is a long-run relationship between alliances and military spending.\autocite[293]{Webbetal2019} 
+
+
+%MF: Given that we're calling attention to our small sample (which we should do), I wonder if we can add a footnote to reassure readers that this is still enough observations to draw meaningful inferences. I can see a non-quant person, in particular, thinking that this really undermines the case for our statistical approach. Maybe we could add a footnote pointing to other studies that have used a similar method with a similar sample size?
+% JA: added the footnote. Let's keep this in mind as we revise, however. 
+The testing procedure for long-run relationships performs well in small samples,\autocite{Webbetal2019} which is essential because we have 73 observations.
+Such limited sample sizes are common in social science time series, and time-series methods in political science can make reasonable inferences with even smaller samples than ours.\autocite[See, for example,][]{OwenQuinn2014}
+The small sample does increase uncertainty in our estimates, however. 
+Based on these test results, we have sufficient confidence to proceed with using a dynamic regression technique to estimate the relationship between U.S. alliances and military spending. 
+%\footnote{\cite{VolschoKelly2012} and \cite{OwenQuinn2014} are two examples of studies that estimate dynamic models with less than 60 observations.}
+
+
+
+% introduce log model
+In estimating the effect of alliance commitments on U.S. military spending, we consider two functional forms for the relationship. 
+It is possible that as total U.S. alliances increase, the marginal cost of new alliances falls.
+Perhaps adding one alliance when there are 40 alliance commitments is less costly than adding one alliance to 15 commitments, for example. 
+Models with the total number of commitments assume that the effect of adding one alliance is roughly constant. 
+In a second model, we relax that assumption by logging the number of alliance commitments before including the logged commitments variable in lags in the model. 
+This transformation of the alliance commitments variable is a simple way to capture a potential non-linear relationship between alliances and U.S. military spending. 
+The long-run multiplier bounds test suggests that there is also a long-run relationship between logged alliance commitments and military spending. 
+One drawback of this approach, however, is that the log alliance commitments coefficient estimates have a less intuitive interpretation. 
+
+% describe controls
+Another concern is that an apparent relationship between alliance commitments and military spending could be driven by other factors. 
+Changes in the international threat environment, for instance, could explain some of the contemporaneous movement in alliance formation and defense expenditures shown in Figure \ref{fig:outcome-iv}.
+We control for several potential confounding variables to reduce omitted variable bias, which occurs when a statistical model does not account for factors that are correlated with the key independent variable and the outcome.\footnote{We consider additional control variables and many model specifications in the appendix, and show that our lagged alliance commitments coefficient is fairly consistent across model specifications.} 
+We lag most of the control variables because we expect that, like alliances, changes in these factors affect the budget in the long-run. 
+
+\begin{itemize}
+
+\item \textbf{Log Combat Fatalities}. We included the log of annual U.S. military combat fatalities as a measure of international conflict intensity.\footnote{To get full coverage from 1947 to 2019, we compiled data on fatalities from three sources: \cite{mintzpolitical92}; the Defense Manpower Data Center; and icasualties.org.} More intense military threats increase defense expenditures and might also drive countries to seek more alliance partners. 
+
+\item \textbf{Lag Major Power Rival Spending}. To account for the broader international threat environment, our model controls for lagged spending by all major power strategic rivals.\footnote{We identified strategic rivalry years with Russia and China using data from \cite{ThompsonDreyer2012}. We then combined rebased data from the Correlates of War and SIPRI to measure Russian and Chinese military spending. See the appendix for results with a variety of other threat controls, including interstate disputes, international crises, and just Russian spending.}
+
+\item \textbf{Post-Conflict Years}. We included a dummy indicator for the five years after a war ends to capture post-conflict peace dividends and the reduced need for alliances once hostilities end.  
+
+\item \textbf{Cold War}. To account for the superpower competition between the United States and the Soviet Union, which drove up spending and alliance formation, we control for Cold War years with a binary indicator.\footnote{The Cold War dummy variable is equal to one before 1991 and is zero afterwards.}
+
+
+
+\item \textbf{Lag Change in GDP}. We control for economic growth because the United States had more resources to invest in defense and military alliances during periods of economic prosperity.
+
+\item \textbf{Lag Budget Deficit}. As a second indicator of the opportunity costs of military spending, we account for the lagged budget deficit. 
+
+\item \textbf{Republican President}. We control for presidential partisanship with a lagged dummy indicator for whether the president was a Republican, as Republican leaders tend to be more hawkish and wary of international entanglements.
+
+\end{itemize}
+  
+Additional presidential administration-specific factors could also influence alliances and defense spending. Although U.S. grand strategy has been relatively constant since 1945, there have been differences in national security priorities across presidents. As described below, after presenting our initial results, we account for these differences by adding presidential fixed effects to our models. 
+
+%On the security front, we included the log of annual U.S. military combat fatalities as a measure of international conflict intensity.\footnote{To get full coverage from 1947 to 2019, we compiled data on fatalities from three sources: \autocite{mintzpolitical92}; the Defense Manpower Data Center; and icasualties.org.}
+%We also included a dummy indicator for the five years after a war ends to capture post-conflict peace dividends and the reduced need for alliances once hostilities end.  
+%To account for the superpower competition between the United States and the Soviet Union, which drove up spending and alliance formation, we control for Cold War years and Soviet/Russian military spending.\footnote{The Cold War dummy variable is equal to one before 1991 and is zero afterwards. We used a combination of data from the Correlates of War and SIPRI to construct the Russian spending measure.}
+%We also controlled for economic factors, as these might shape the opportunity costs of military spending\autocite{Zielinskietal2017,norrlofCMPS19} and change how policymakers assess the burdens of international commitments.  
+%Our main economic controls are lagged changes in GDP and lagged budget deficit.
+%Finally, we controlled for presidential partisanship with a lagged dummy indicator for whether the president was a Republican, as Republican leaders tend to be more hawkish and wary of international entanglements.\footnote{We also consider other control variables and many model specifications in the appendix, and show that our lagged alliance commitments coefficient is fairly consistent across model specifications.} 
+
+
+
+
+\section*{Findings}
+
+
+\autoref{tab:adl-coefs} provides the results from our regression models of U.S. defense expenditures from 1947 to 2019. 
+Model 1 uses the total number of security guarantees to construct our independent variables and Model 2 is based on logged alliance commitments. 
+%The first thing to note is that past levels of military spending help predict current spending, which is unsurprising. 
+
+
+\begin{table}[!htbp] \centering 
+\begin{tabular}{@{\extracolsep{5pt}}lcc} 
+\\[-1.8ex]\hline \\[-1.8ex] 
+\\[-1.8ex] & \multicolumn{2}{c}{Military Spending} \\ 
+\\[-1.8ex] & (1) & (2)\\ 
+\hline \\[-1.8ex] 
+ Lagged Military Spending & 0.387$^{}$ & 0.440$^{}$ \\ 
+  & (0.251, 0.524) & (0.300, 0.581) \\ 
+  Lag Alliance Commitments & 9.670$^{}$ &  \\ 
+  & (6.796, 12.544) &  \\ 
+  Lag Log Alliance Commitments &  & 273.668$^{}$ \\ 
+  &  & (180.698, 366.639) \\ 
+  Lag Change in GDP & $-$0.060$^{}$ & $-$0.024 \\ 
+  & ($-$0.128, 0.008) & ($-$0.094, 0.045) \\ 
+  Lag Major Rival Spending & 0.027 & 0.076 \\ 
+  & ($-$0.075, 0.129) & ($-$0.025, 0.176) \\ 
+  Cold War & 25.708 & $-$33.299 \\ 
+  & ($-$49.418, 100.834) & ($-$101.715, 35.116) \\ 
+  Post-Conflict Years & $-$9.381 & $-$13.377 \\ 
+  & ($-$36.015, 17.252) & ($-$41.204, 14.450) \\ 
+  Log Combat Fatalities & 8.938$^{}$ & 9.384$^{}$ \\ 
+  & (5.018, 12.857) & (5.269, 13.499) \\ 
+  Lag Republican President & 19.215 & 22.925$^{}$ \\ 
+  & ($-$4.582, 43.013) & ($-$1.932, 47.781) \\ 
+  Lag Budget Deficit & $-$0.418 & $-$1.651 \\ 
+  & ($-$7.266, 6.429) & ($-$8.842, 5.539) \\ 
+  Constant & $-$202.501$^{}$ & $-$802.537$^{}$ \\ 
+  & ($-$351.566, $-$53.435) & ($-$1,165.185, $-$439.888) \\ 
+ N & 73 & 73 \\ 
+\hline \\[-1.8ex] 
+\multicolumn{3}{l}{95\% Confidence Intervals in Parentheses.} \\ 
+\end{tabular} 
+\caption{Coefficient Estimates from an autoregressive distributed lag regression model of U.S. alliance commitments and military spending from 1947 to 2019.
+                  %The dependent variable is annual military spending, measured in billions of 2011 U.S. dollars.
+                  %The key independent variable is a one year lag of U.S. alliance commitments in each year, either without any transformation or in logs.
+                   } 
+\label{tab:adl-coefs}
+\end{table}
+
+
+The coefficient on the alliance commitments variable is positive and the 95 percent confidence intervals exclude zero in Models 1 and 2. 
+This suggests that alliance commitments are positively correlated with defense expenditures, as the budget hawk school expects, regardless of whether we model this relationship as linear (Model 1) or characterized by diminishing marginal costs (Model 2). 
+Although the direction of the effect is informative, statistical significance is a poor indicator of substantive importance.\autocite{McCaskeyRainey2015}
+We want to know the magnitude of the association between alliance commitments and U.S. spending, not just whether the p-values are below a certain threshold. 
+
+The alliance commitments coefficient captures the effect of adding one new security guarantee on the next year's defense budget.
+Based on Model 1, adding one additional commitment increases U.S. defense spending the next year by \$9.8 billion.
+The 95 percent confidence interval indicates that the short-run effect could range between \$6.8 and \$12.5 billion.
+Independent variables have a less intuitive interpretation when they are log-transformed, but Model 2 similarly yields a potentially large substantive effect. 
+A 10 percent increase in the logged changes in alliance commitments leads to about \$29 billion more in defense spending the next year, with a 95 percent confidence interval ranging from \$22.3 billion to \$35.6 billion.
+
+Much of the cost (or savings) associated with alliances might not materialize just one year later. 
+Because changes in military spending accumulate over time, the impact of a new alliance commitment is spread out over multiple years. 
+The United States and Taiwan forged a formal defense pact in 1954, for instance, but U.S. troop levels on the island did not peak until four years later.\autocite{kaneglobal04} 
+The long-run costs of an alliance, then, give a more complete sense of their financial toll than the regression coefficients alone. 
+We use the long-run multiplier of alliance commitments to capture the \textit{total} effect of a one unit increase in the lagged number of alliance commitments on defense spending. 
+To calculate the long-run multiplier, we divide the lagged alliance commitments coefficient by the lagged level of military spending coefficient and calculate standard errors with the delta method.\footnote{Formally, this is equal to $\frac{\mbox{Lagged Alliance Commitments Coefficient}}{(1 - \mbox{Lagged Spending Levels Coefficient})}$. This long-run multiplier is the basis of the long-run multiplier test we used to assess the presence of a long-run relationship.} 
+
+The long-run multiplier of a new alliance commitment is positive and large: one additional alliance commitment ultimately adds between \$11 and \$21 billion to the defense budget, on average, according to Model 1.
+Put differently, the annual level of the defense budget is \$11 to \$21 billion greater once the impact of making a new alliance commitment is fully realized.
+This estimated range is a 95\% confidence interval based on a point estimate of 15.8 and a standard error of 2.6. 
+Based on the estimates from Model 2, a 10 percent increase in logged alliance commitments adds \$51 billion in spending over the long-run, with a 95 percent confidence interval that spans from \$36 billion to \$68 billion.
+
+
+To further illustrate our results, we assess the substantive impact of a well-known change in U.S. alliance commitments: NATO expansion after the Cold War. 
+This part of the analysis answers recent calls for further scrutiny of NATO expansion, which was an extremely consequential policy decision.\autocite{GoldgeierShifrinson2020}
+We focus on the admission of the three Baltic States in 2003-04. 
+Offering NATO membership to Estonia, Latvia, and Lithuania was unique and controversial because they were formerly part of the Soviet Union.
+What was the budgetary impact of making formal defense commitments to three former Soviet states?  
+
+
+To find out, we carried out a counterfactual analysis. 
+First, we simulated a set of coefficient estimates using the results from the regression model.\footnote{The simulation uses the central limit theorem to simulate a distribution of coefficients from the model estimates, then multiplies the simulated parameter vectors by two datasets -- one with the observed data and the other with hypothetical data.}
+We then used the model estimates to make predictions in two scenarios: one with the observed NATO expansion into the Baltic States and the other in a hypothetical scenario where NATO did not expand. 
+In the latter analysis, we remove the three Baltic alliance commitments and hold all other factors constant except the lagged level of spending.
+This means that the counterfactual data contains three fewer U.S. alliance commitments relative to the observed number of alliances after 2004. 
+The counterfactual analysis predicts spending in each year, then uses the predicted values as the lagged spending value in the next period, which allows us to fully express the impact of the hypothetical change in alliances.\footnote{Because annual predictions in the counterfactual are based on simulated lagged spending values after 2004, there is more uncertainty in the counterfactual estimates than the observed data, which draw on a single lagged spending value instead of multiple simulated values.}
+The difference in spending between these two scenarios provides an estimate for the budgetary cost of NATO expansion.
+
+
+%MF: edits here for clarity, moved up some text from below to summarize main point.
+\autoref{fig:nato-counterfactual-adl-nolog} plots the results. 
+The bottom panel shows 95\% confidence intervals for predicted changes in U.S. military spending, with the observed case depicted in black and the hypothetical non-expansion scenario shown in gray.
+The top panel shows the 95\% confidence interval for the difference between the predictions with the observed data and predictions with the counterfactual data. 
+The figure makes clear that NATO expansion into the Baltic states consistently led to higher military spending. 
+By 2019, the estimated difference between the observed and counterfactual scenarios is between \$13 and \$46 billion. 
+These costs reflect substantial investments in infrastructure and increased NATO membership expenses.\autocite{Moller2020}
+Further expenditures support allied training, procurement and more recently, the European Deterrence Initiative.\autocite{CRS2020} 
+NATO expansion is also associated with a perceptible difference in U.S. military spending when we log-transform the alliance commitments variable, but the estimated effects are more uncertain. 
+As shown in the online appendix, the estimated difference between adding the Baltic states and keeping them out of NATO is between \$1 and \$40 billion by 2019, all else equal. 
+
+\begin{figure} 
+\includegraphics[width = .95\textwidth]{../figures/nato-counterfactual-adl-nolog.png}
+\caption{Estimated U.S. military spending with and without NATO expansion to Estonia, Latvia and Lithuania. 
+The bottom panel shows predictions from two circumstances: (1) observed NATO expansion and (2) a counterfactual scenario where NATO did not add the three Baltic countries in 2004. 
+The top panel plots the estimated annual difference between predictions from the observed data. 
+The error bars summarize the 95\% confidence interval for the predicted values and differences.
+Estimates on the scale of billions of dollars.}
+\label{fig:nato-counterfactual-adl-nolog}
+\end{figure}
+
+
+% cut the logged commitments figure
+\begin{comment}
+To make substantive predictions about the impact of logged alliance commitments, we repeated the NATO counterfactual simulation. 
+\autoref{fig:nato-counterfactual-adl-log} plots these results, which are based on the estimates in the second column of \autoref{tab:adl-coefs}. 
+
+
+
+\begin{figure} 
+\includegraphics[width = .95\textwidth]{../figures/nato-counterfactual-adl-log.png}
+\caption{Estimated U.S. military spending with and without NATO expansion to Estonia, Latvia and Lithuania. 
+This simulation uses logged alliance commitments as the key independent variable. 
+The bottom panel shows predictions from two circumstances, first the historic NATO expansion from 2004, and the other from counterfactual data where NATO did not add these three members. 
+The top panel plots the estimated annual difference between predictions from the observed data. 
+The error bars summarize the 95\% confidence interval for the predicted values and differences.
+Estimates on the scale of billions of dollars.}
+\label{fig:nato-counterfactual-adl-log}
+\end{figure}
+
+
+NATO expansion is associated with a perceptible difference in U.S. military spending, even after log-transforming the alliance commitments variable, though the estimated effects are smaller. 
+By 2019, the estimated difference between adding the Baltic states and not is between \$5 and \$41 billion, all else equal. 
+Therefore, logging alliance commitments leads to very similar inferences about the relationship between alliances and U.S. military spending. 
+
+\end{comment}
+  
+% sum up the findings
+%MF: edits here
+In sum, we find that taking on more alliance commitments is associated with increased military spending, all else equal.
+Adding a single alliance commitment to the U.S. portfolio adds billions of dollars to the defense budget, on average, in the long run.
+These conclusions do not depend on assumptions about the marginal cost of alliances, as inferences with logged alliance commitments are very similar. 
+These results are consistent with the budget hawk view that alliance participation increases U.S. military spending, and contradict the bargain hunter perspective.
+However, before reaching more definitive conclusions, it is important to assess the robustness of our findings. 
+We take up this task in the next section. 
+
+
+
+\subsection*{Robustness Checks}
+
+Our findings could be driven by unusual and influential observations, especially since our sample is relatively small. 
+U.S. military spending and alliances both increase dramatically between 1949 and 1951, as the Korean War drove large spending increases and the United States formed some key Cold War alliances.
+There is another sharp increase in both defense expenditures and alliance commitments shortly after the 9/11 attacks.  
+We assess whether these periods or other transient shifts in the international context drive our results in three ways.
+
+
+First, we estimate models in a different samples, including one that starts in 1954 instead of of 1947 and another that starts in 1920.\footnote{The latter results, which include a pre-World War II period when the United States did not provide any security guarantees, appear in the online appendix.}
+Starting in 1954 eliminates any impact of data from the unusual immediate postwar period on our estimates. 
+Second, we add two dummy variables -- one for all years before 1953 and another for the period after 9/11 -- to control for these unique periods. 
+Third, we include presidential fixed effects in our model.
+Administration-specific binary variables control for unobserved confounding factors that may be specific to presidential administrations.
+This accounts for unusual administration-specific changes, such as the Reagan defense buildup and the global war on terror, as well as changes in U.S. foreign policy priorities.\footnote{In the models with president-specific binary variables, we drop the Cold War and Republican president control variables, as these indicators are perfectly correlated with some presidential fixed effects.} 
+
+
+\begin{figure} 
+\includegraphics[width = .95\textwidth]{../figures/lrm-rob.png}
+\caption{Estimated long-run multiplier of a one-unit increase in U.S. alliance commitments across different samples and model specifications. 
+The y-axis contains information about how the model or sample deviates from our baseline regression model. 
+Points mark the expected value, while the error bars summarize the 95\% confidence interval.
+Estimates on the scale of billions of dollars. }
+\label{fig:lrm-rob}
+\end{figure}
+
+
+%MF: light editing and further drawing out of implications from the FE model. 
+\autoref{fig:lrm-rob} summarizes how these changes alter our initial results. 
+The figure reports the estimated long-run multipliers of a one-unit increase in U.S. alliance commitments for each model.
+These estimates suggest that our substantive conclusions about the relationship between alliances and military spending are relatively unaffected by unusual periods of alliances and defense spending after World War II.
+There are slight differences in the estimates across the different specifications, largely because of our small sample size, but the substantive inferences are broadly similar. 
+Most models find a more uncertain long-run effect than our original model (\$11 to \$21 billion), but there is little appreciable difference in the estimates.  
+The biggest estimated effect emerges from the model that adds presidential fixed effects to our baseline specification.
+This model suggests that the long-run impact of adding an alliance is about \$18 billion, compared to \$16 billion in our main analysis. 
+Adding presidential fixed effects increases uncertainty in the long-run multiplier, as this model has twelve fewer degrees of freedom. 
+%That we continue to find large positive increases in the fixed effects model means that within the same administration taking on new commitments increases defense spending. 
+Our results cannot be explained, therefore, by changes in foreign policy or grand strategy among different presidents.
+
+
+
+We present the results from further robustness checks in an online appendix. 
+First, we conduct an extreme bounds analysis that involves re-running our model 12,911 times with different combinations of independent variables.
+This analysis allows us to determine whether our results are sensitive to the model specification we chose.
+Second, we estimate error correction models as an alternative way to specify dynamic regression models.
+Third, we estimate static models with alliances and military spending in first differences.
+Fourth, we use an alternative lag structure in the ADL model, and find a slightly smaller substantive effect of \$6 to 15 billion per alliance when we include two lags of defense spending. 
+Last, we analyze data from 1920 on to capture the impact of alliances starting with no commitments. 
+All of these checks come to the same substantive conclusion: alliance participation is associated with greater U.S. military spending.
+%The evidence consistently favors the budget hawk view of alliances. 
+
+%As another way to account for the influence of unusual observations, we replicate our analysis using robust regression estimators. 
+%This allows us to analyze two additional periods of time: 1945-2019 and 1949-2019 (recall that our main models start in 1947). 
+
+\input{conclusion-final}
+
+\vspace{15mm} 
+\textbf{Data Availability Statement}: The data and materials that support the findings of this study are available in the Harvard Dataverse at \url{https://doi.org/10.7910/DVN/T384KW}. 
+
+
+%\newpage 
+
+%\singlespace
+ 
+%\bibliography{../us-all-milex-bib}
+%\printbibliography
+
+
+
+
+\end{document}

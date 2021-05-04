@@ -1,4 +1,4 @@
-# Joshua Alley & Matthew Fuhrmann
+# Joshua Alley and Matthew Fuhrmann
 # Load data on US military spending and other variables
 
 # run military spending data script

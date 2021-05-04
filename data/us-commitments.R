@@ -1,4 +1,4 @@
-# Joshua Alley & Matthew Fuhrmann
+# Joshua Alley and Matthew Fuhrmann
 # Measure of the number of US allies in a given year
 
 

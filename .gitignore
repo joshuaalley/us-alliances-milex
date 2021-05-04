@@ -56,3 +56,6 @@ vignettes/*.pdf
 *.concordance.tex
 *.nav
 *.snm
+*.xml
+*.bcf
+*.dvi
