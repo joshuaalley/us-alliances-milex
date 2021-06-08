@@ -229,3 +229,22 @@ ggplot(lrm.rob, aes(x = lrm.est, y = Model)) +
   scale_x_continuous(limits = c(0, 40)) +
   labs(x = "Long Run Multiplier Estimate")
 ggsave("figures/lrm-rob.png", height = 6, width = 8)
+
+
+# sensitivity analysis 
+library(sensemakr)
+
+# use lm-adl lm object
+sense.adl <- sensemakr(
+  model = lm.adl,
+  treatment = "lag_commitments",
+  benchmark_covariates = "log_fatalities_combined",
+  kd = c(.5, 1, 2, 3),
+  q = .5
+)
+plot(sense.adl)
+plot(sense.adl, type = "extreme")
+print(sense.adl)
+summary(sense.adl)
+
+ovb_minimal_reporting(sense.adl, format = "latex")

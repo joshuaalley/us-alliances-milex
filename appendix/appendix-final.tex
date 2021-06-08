@@ -165,6 +165,51 @@ The models contain different control variables, in addition to the alliance comm
 
 
 
+\section{Sensitivity Analysis}
+
+
+Confounding by unobserved factors is a further threat to our inferences in this paper. 
+Although we adjust for a variety of observable variables, it is possible that some unobservable confounding factor is responsible for the strong positive correlation between alliance commitments and U.S. military spending. 
+Theoretically, U.S. foreign policy interests and grand strategy in the post-war period and policymakers' expectations about the future are the most likely unobservables. 
+We cannot rule the possibility of confounding by unobservables out entirely, but we can use our model to assess the implications of unobserved confounding using sensitivity analysis \citep{CinelliHazlett2020}. 
+
+
+Sensitivity analysis uses model estimates to assess how large confounding by unobserved factors would have to be to reduce or eliminate an estimated relationship. 
+Our analysis uses the main regression model from the manuscript. 
+We then ask how severe confounding by unobservable factors would have to be to cut the lagged alliance commitments coefficient in half.
+We chose this threshold because it creates a stringent test, and is roughly the threshold where the magnitude of the long-run relationship between alliances and spending might be consistent with the budget hawk view.
+To facilitate substantive interpretation, our analysis benchmarks the strength of the hypothetical unobserved confounding factor to the log combat fatalities coefficient, as this war intensity measure is a strong predictor of military spending. 
+
+
+This sensitivity analysis generates thresholds for three types of confounding. 
+\autoref{tab:sensitivity-res} presents these results.
+First, in an extreme case ($R^2_{Y \sim D |{\bf X}}$) where an unobserved confounder or some combination of several confounders explains 100\% of the residual variation in military spending, those factors would also have to explain 40\% of the variation in alliances to fully account for the association between alliance commitments and U.S. military spending.  
+The next two numbers in \autoref{tab:sensitivity-res} express the percentage of the residual variation in alliance commitments and military spending that some unobservable factor would have to explain to reduce the alliance commitments coefficient estimate by half. 
+$RV_{q = 0.5}$ shows that unobserved confounders that explain 33.8\% of such variation could cut the alliance commitments coefficient in half. 
+$RV_{q = 0.5, \alpha = 0.05}$ expresses the same quantity, for a hypothesis test with a confidence level of .05.
+
+
+\begin{table}[!h]
+\centering
+\begin{tabular}{lrrrrrr}
+\multicolumn{7}{c}{Outcome: \textit{Military Spending}} \\
+\hline \hline 
+Treatment: & Est. & S.E. & t-value & $R^2_{Y \sim D |{\bf X}}$ & $RV_{q = 0.5}$ & $RV_{q = 0.5, \alpha = 0.05}$  \\ 
+\hline 
+\textit{Lag Alliance Commitments} & 9.67 & 1.466 & 3.297 & 40.8\% & 33.8\% & 14.9\% \\ 
+\hline 
+df = 63 & & \\%\multicolumn{5}{r}{ \small \textit{Bound (0.5x Log Combat Fatalities)}: $R^2_{Y\sim Z| {\bf X}, D}$ = 16\%, $R^2_{D\sim Z| {\bf X} }$ = 0.2\%} \\
+\end{tabular}
+\caption{Results from sensitivity analysis of the association between lagged alliance commitments and U.S. military spending, 1947 to 2020.}
+\label{tab:sensitivity-res}
+\end{table}
+
+
+These estimates suggest that substantial unobserved confounding is necessary to even reduce the estimated association between alliances and spending by 50\%. 
+This sensitivity analysis cannot rule out unobserved confounding, but it establishes the necessary magnitude of any confounding. 
+Seeing as our models account for many salient observables, we suspect that remaining unobservables are probably not strong enough predictors of alliances and spending to change our substantive inferences.
+
+
 
 \section{Error Correction Models} 
 
