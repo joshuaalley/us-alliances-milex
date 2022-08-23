@@ -73,7 +73,7 @@ summary(lm.adl.log)
 reg.check(lm.adl.log)
 # diagnose and print results
 adl.res.log <- summary(lm.adl.log)
-adl.res.log$coefficients[3]*log(1.10)
+adl.res.log$coefficients[3]*log(1.1)
 
 
 # Test the LRM
@@ -88,7 +88,7 @@ lrm.adl.log / deltamethod(~ (x3) / (1 - x2), coef(lm.adl.log), vcov(lm.adl.log))
 
 
 # calculate LRM in logs
-lrm.adl.log*log(1.10)
+lrm.adl.log*log(1.1)
 # 95% upper bound of LRM in logs
 (lrm.adl.log + (2 * deltamethod(~ x3 / (1 - x2), coef(lm.adl.log), 
                                  vcov(lm.adl.log))))*log(1.1)
@@ -136,7 +136,7 @@ stargazer(lm.adl, lm.adl.log,
 # Estimate model with data from 1954 on
 fit.55 <- lm(milex_SI ~ lag_milex_SI + lag_commitments +
                peace_5 + log_fatalities_combined +
-               lag_rep_pres +
+               lag_rep_pres + cold_war +
                lag_budget_deficit + lag_change_gdp +
                lag_mprival_milex,
                   data = us.data.1955)
@@ -148,7 +148,7 @@ summary(fit.55)
 # GWOT (post 9-11 dummy)
 fit.911 <- lm(milex_SI ~ lag_milex_SI + lag_commitments +
                 peace_5 + log_fatalities_combined +
-                lag_rep_pres +
+                lag_rep_pres + cold_war + 
                 lag_budget_deficit + lag_change_gdp +
                 lag_mprival_milex +
                      post_911,
@@ -161,7 +161,7 @@ summary(fit.911)
 # 52 and before dummy
 fit.p52 <- lm(milex_SI ~ lag_milex_SI + lag_commitments +
                 peace_5 + log_fatalities_combined +
-                lag_rep_pres +
+                lag_rep_pres + cold_war + 
                 lag_budget_deficit + lag_change_gdp +
                 lag_mprival_milex +
                      pre_52, 
@@ -174,7 +174,7 @@ summary(fit.p52)
 # both atheoretical time dummies
 fit.tdum <- lm(milex_SI ~ lag_milex_SI + lag_commitments +
                  peace_5 + log_fatalities_combined +
-                 lag_rep_pres +
+                 lag_rep_pres + cold_war + 
                  lag_budget_deficit + lag_change_gdp +
                  lag_mprival_milex +
                       pre_52 + post_911, 
@@ -228,7 +228,9 @@ ggplot(lrm.rob, aes(x = lrm.est, y = Model)) +
                  size = 1) +
   scale_x_continuous(limits = c(0, 40)) +
   labs(x = "Long Run Multiplier Estimate")
-ggsave("figures/lrm-rob.png", height = 6, width = 8)
+ggsave("figures/lrm-rob.tiff",
+       dpi = 300,
+       height = 6, width = 8)
 
 
 # sensitivity analysis 

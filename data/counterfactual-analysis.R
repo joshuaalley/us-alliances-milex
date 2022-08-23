@@ -161,8 +161,9 @@ counterfactual.sim.adl <- function(model, log, st.year,
                nrow = 2)
   nato.counterfactual <- arrangeGrob(sim.nato.diff, sim.nato.plot,
                                      nrow = 2)
-  ggsave(paste0(folder, "/nato-counterfactual-adl-", log, ".png"),
+  ggsave(paste0(folder, "/nato-counterfactual-adl-", log, ".tiff"),
          nato.counterfactual, 
+         dpi = 300,
          height = 6, width = 8)  
 } # end function
 

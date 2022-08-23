@@ -402,7 +402,9 @@ ggplot( aes(x = year, y = value)) + # plot
   geom_line(size = 1) +
   labs(x = "Year") +
   theme_bw()
-ggsave("figures/outcome-iv.png", height = 6, width = 8)
+ggsave("figures/outcome-iv.tiff", 
+       dpi = 300,
+       height = 6, width = 8)
 
 
 

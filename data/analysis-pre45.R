@@ -20,6 +20,7 @@ ggplot(us.data.pre45, aes(x = year, y = ln_milex)) + geom_line()
 # plot spending without log and commitments
 ggplot(us.data.pre45, aes(x = year, y = milex_SI)) + geom_line()
 ggplot(us.data.pre45, aes(x = year, y = commitments)) + geom_line()
+ggplot(us.data.pre45, aes(x = year, y = commitments_nowar)) + geom_line()
 
 # Plot with only the IV and DV
 select(us.data.pre45, year, milex_SI, # select variables and years, pivot long
@@ -152,8 +153,6 @@ lrm.adl / deltamethod(~ (x3) / (1 - x2), coef(lm.adl.pre45), vcov(lm.adl.pre45))
 
 
 
-
-
 ### Tabulate results
 # should be translated into sidewaystable in LaTeX. 
 stargazer(lm.adl.pre45, adl.pre45.log, lm.adl.pre45.pres,
@@ -194,7 +193,8 @@ lrm.rob.pre45 <- cbind.data.frame(
         coef(lm.adl.pre45.pres)[3] / (1 - coef(lm.adl.pre45.pres)[2]),
         coef(rlm.adl.pre45)[3] / (1 - coef(rlm.adl.pre45)[2]),
         coef(rlm.adl.pre45.pres)[3] / (1 - coef(rlm.adl.pre45.pres)[2]),
-        (coef(adl.pre45.logr)[3] / (1 - coef(adl.pre45.logr)[2]))*log(1.10)
+        (coef(adl.pre45.logr)[3] / (1 - coef(adl.pre45.logr)[2]))*log(1.10),
+        coef(lm.adl.pre45.nowar)[3] / (1 - coef(lm.adl.pre45.nowar)[2])
   ), # estimates, then SE 
   rbind(deltamethod(~ x3 / (1 - x2), coef(lm.adl.pre45), vcov(lm.adl.pre45)),
         deltamethod(~ x3 / (1 - x2), coef(adl.pre45.log), vcov(adl.pre45.log))*log(1.10),
@@ -215,4 +215,7 @@ ggplot(lrm.rob.pre45, aes(x = lrm.est, y = Model)) +
                  size = 1) +
   labs(x = "Long Run Multiplier Estimate")
 ggsave("appendix/lrm-rob-pre45.png", height = 6, width = 8)
+
+
+
 

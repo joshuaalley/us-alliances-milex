@@ -89,7 +89,7 @@ summary(lm.adl.icbc)
 # strategic rival milex: CINC data here
 lm.adl.rival <- lm(milex_SI ~ lag_milex_SI + lag_commitments +
                        peace_5 + lag_rival_milexc + log_fatalities_combined +
-                       lag_rep_pres +
+                       lag_rep_pres + cold_war + 
                        lag_budget_deficit + lag_change_gdp,
                      data = us.data)
 reg.check(lm.adl.rival)
@@ -123,7 +123,7 @@ ggplot(us.data, aes(x = year, y = log_fatalities_combined,
 lm.adl.shocks <- lm(milex_SI ~ lag_milex_SI + 
                       lag_commitments +
                       peace_5 + oatley_shocks + log_fatalities_combined +
-                      lag_rep_pres + 
+                      lag_rep_pres + cold_war + 
                       lag_budget_deficit + lag_change_gdp,
                     data = us.data)
 reg.check(lm.adl.shocks)
@@ -211,7 +211,7 @@ stargazer(lm.adl.cw, lm.adl.cw.log,
 lm.adl.2l <- lm(milex_SI ~ lag_milex_SI + lag2_milex_SI +
                lag_commitments +
                peace_5 + log_fatalities_combined +
-               lag_rep_pres + 
+               lag_rep_pres + cold_war + 
                lag_budget_deficit + lag_change_gdp +
                lag_mprival_milex,
              data = us.data)
@@ -238,7 +238,7 @@ lrm.adl.2l - (2 *
 lm.adl.comm <- lm(milex_SI ~ lag_milex_SI + 
                   commitments + lag_commitments +
                   peace_5 + log_fatalities_combined +
-                  lag_rep_pres + 
+                  lag_rep_pres + cold_war + 
                   lag_budget_deficit + lag_change_gdp +
                   lag_mprival_milex,
                 data = us.data)
@@ -262,14 +262,14 @@ stargazer(lm.adl.2l, lm.adl.comm,
           dep.var.labels=c("Military Spending"),
           order = c("lag_milex_SI", "lag2_milex_SI",
                     "lag_commitments","commitments", 
-                    "lag_change_gdp", 
+                    "lag_change_gdp", "Cold War",
                     "peace_5", "log_fatalities_combined",
                     "lag_rep_pres", "lag_budget_deficit",
                     "lag_mprival_milex"),
           covariate.labels=c("Lagged Military Spending", "Second Lag Military Spend.",
                              "Lag Alliance Commitments",
                              "Alliance Commitments", 
-                             "Lag Change in GDP", 
+                             "Lag Change in GDP", "Cold War",
                              "Post-Conflict Years", "Log Combat Fatalities",
                              "Lag Republican President", 
                              "Lag Budget Deficit",
